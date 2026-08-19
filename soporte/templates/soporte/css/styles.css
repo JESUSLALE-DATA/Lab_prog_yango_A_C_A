@@ -1,0 +1,119 @@
+/* 3. CÓDIGO COMPLETO DE styles.css */
+:root {
+    --primary: #0d6efd;
+    --primary-dark: #0b2545;
+    --light: #f8f9fa;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+}
+
+.hero {
+    background: linear-gradient(135deg, #0b2545 0%, #1e3a8a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://picsum.photos/id/1015/2000/1200') center/cover;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.hero > .container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-image {
+    filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.3));
+    transition: transform 0.4s ease;
+}
+
+.hero-image:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+.service-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(13, 110, 253, 0.1) !important;
+}
+
+.service-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 
+                0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+}
+
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .icon-circle {
+    transform: scale(1.1);
+    background-color: #0b5ed7 !important;
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, #0b2545, #1e3a8a);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+.text-sm {
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .benefits-list .d-flex {
+        margin-bottom: 2rem;
+    }
+}
+
+.hero-text-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 380px;
+}
+
+#hola-text {
+    transition: all 0.4s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+#hola-text:hover {
+    transform: rotate(12deg) scale(1.15) translateY(-10px);
+    color: #ffd700; /* Color dorado al pasar el mouse */
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
