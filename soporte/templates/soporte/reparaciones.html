@@ -110,13 +110,16 @@
                             <!-- Acciones -->
                             <td class="text-center">
 
-                                <a href="#NADAAUN"
-                                   class="btn btn-sm btn-outline-warning"
-                                   title="Editar reparación">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
+                                <!-- Editar -->
+                               <a href="{% url 'editar_reparacion' reparacion.id %}"
+   class="btn btn-sm btn-outline-warning"
+   title="Editar reparación">
+    <i class="bi bi-pencil"></i>
+</a>
 
-                                <a href="#NADAAUN"
+
+                                <!-- Eliminar -->
+                                <a href="{% url 'eliminar_reparacion' reparacion.id %}"
                                    class="btn btn-sm btn-outline-danger"
                                    title="Eliminar reparación">
                                     <i class="bi bi-trash"></i>

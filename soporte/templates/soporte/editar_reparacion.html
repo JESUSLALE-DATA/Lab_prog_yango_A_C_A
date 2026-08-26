@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Reparación</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+<div class="container mt-4">
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-info-subtle">
+            <h5 class="mb-0 text-primary">
+                <i class="bi bi-pencil"></i>
+                Editar reparación
+            </h5>
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <!-- Técnico -->
+                <div class="mb-3">
+                    <label class="form-label">Técnico</label>
+
+                    <input type="text"
+                           class="form-control"
+                           value="{{ reparacion.tecnico }}"
+                           disabled>
+                </div>
+
+                <!-- Diagnóstico -->
+                <div class="mb-3">
+                    <label for="diagnostico" class="form-label">
+                        Diagnóstico
+                    </label>
+
+                    <textarea name="diagnostico"
+                              id="diagnostico"
+                              class="form-control"
+                              rows="3">{{ reparacion.diagnostico }}</textarea>
+                </div>
+
+                <!-- Fecha de entrega -->
+                <div class="mb-3">
+                    <label for="fecha_entrega" class="form-label">
+                        Fecha de entrega
+                    </label>
+
+                    <input type="date"
+                           name="fecha_entrega"
+                           id="fecha_entrega"
+                           class="form-control"
+                           value="{{ reparacion.fecha_entrega|date:'Y-m-d' }}">
+                </div>
+
+                <!-- Estado -->
+                <div class="mb-3">
+                    <label for="estado" class="form-label">
+                        Estado
+                    </label>
+
+                    <select name="estado"
+                            id="estado"
+                            class="form-select">
+
+                        <option value="ESPERA"
+                            {% if reparacion.estado == "ESPERA" %}selected{% endif %}>
+                            En espera
+                        </option>
+
+                        <option value="REPARANDO"
+                            {% if reparacion.estado == "REPARANDO" %}selected{% endif %}>
+                            En reparación
+                        </option>
+
+                        <option value="FINALIZADO"
+                            {% if reparacion.estado == "FINALIZADO" %}selected{% endif %}>
+                            Finalizado
+                        </option>
+
+                        <option value="ENTREGADO"
+                            {% if reparacion.estado == "ENTREGADO" %}selected{% endif %}>
+                            Entregado
+                        </option>
+
+                    </select>
+                </div>
+
+                <!-- Solución -->
+                <div class="mb-3">
+                    <label for="solucion" class="form-label">
+                        Solución
+                    </label>
+
+                    <textarea name="solucion"
+                              id="solucion"
+                              class="form-control"
+                              rows="3">{{ reparacion.solucion }}</textarea>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-success">
+                        <i class="bi bi-check-circle"></i>
+                        Guardar cambios
+                    </button>
+
+                    <a href="{% url 'lista_reparaciones' %}"
+                       class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
