@@ -118,3 +118,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # Para desarrollo:
 STATICFILES_DIRS = [BASE_DIR / 'soporte/static']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'soporte_yango',
+        'USER': 'yango_user',
+        'PASSWORD': 'colo1234',          # ← solo letras y números
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'OPTIONS': {
+            'client_encoding': 'UTF8',
+        },
+    }
+}

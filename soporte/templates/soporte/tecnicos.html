@@ -1,32 +1,63 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Técnicos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-<div class="container mt-4">
-    <h2>Listado de Técnicos</h2>
-    <div class="row">
+{% extends 'soporte/base.html' %}
+
+{% block title %}Técnicos{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+        <div>
+            <h2 class="mb-1 fw-bold text-dark">
+                <i class="bi bi-people-fill text-primary me-2"></i>Técnicos
+            </h2>
+            <p class="text-muted mb-0">Personal encargado de las reparaciones</p>
+        </div>
+        <a href="{% url 'crear_tecnico' %}" class="btn btn-primary">
+            <i class="bi bi-person-plus me-1"></i> Nuevo Técnico
+        </a>
+    </div>
+
+    {% if tecnicos %}
+    <div class="row g-4">
         {% for tecnico in tecnicos %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">{{ tecnico.nombre }} {{ tecnico.apellido }}</h5>
-                    <p class="card-text">{{ tecnico.especialidad }}</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center me-3"
+                             style="width: 52px; height: 52px;">
+                            <i class="bi bi-person-workspace fs-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0 fw-semibold">{{ tecnico.nombre }} {{ tecnico.apellido }}</h5>
+                            <small class="text-muted">{{ tecnico.especialidad }}</small>
+                        </div>
+                    </div>
+                    {% if tecnico.email %}
+                    <p class="mb-0 text-muted small">
+                        <i class="bi bi-envelope me-1"></i>{{ tecnico.email }}
+                    </p>
+                    {% endif %}
                 </div>
-                <div class="card-footer text-center bg-white">
-                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                <div class="card-footer bg-white border-0 pt-0">
+                    <a href="{% url 'eliminar_tecnico' tecnico.id %}"
+                       class="btn btn-outline-danger btn-sm w-100"
+                       onclick="return confirm('¿Eliminar a {{ tecnico.nombre }} {{ tecnico.apellido }}?')">
+                        <i class="bi bi-trash me-1"></i> Eliminar
+                    </a>
                 </div>
             </div>
         </div>
-        {% empty %}
-        <p>No hay técnicos cargados.</p>
         {% endfor %}
     </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="bi bi-people display-1 text-muted opacity-25"></i>
+        <h4 class="mt-3 text-muted">No hay técnicos registrados</h4>
+        <p class="text-muted">Comienza agregando el primer técnico del equipo.</p>
+        <a href="{% url 'crear_tecnico' %}" class="btn btn-primary mt-2">
+            <i class="bi bi-person-plus me-1"></i> Agregar Técnico
+        </a>
+    </div>
+    {% endif %}
 </div>
-</body>
-</html>
+{% endblock %}
